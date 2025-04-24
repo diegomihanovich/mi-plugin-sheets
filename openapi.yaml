@@ -1,0 +1,49 @@
+openapi: 3.0.1
+info:
+  title: Demo Google Sheets API
+  version: "1.0.0"
+servers:
+  - url: https://sheets.googleapis.com/v4
+paths:
+  /spreadsheets/{spreadsheetId}/values/{range}:
+    get:
+      summary: Leer rango de Google Sheets
+      parameters:
+        - name: spreadsheetId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: range
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Tu API key de Google Cloud
+      responses:
+        '200':
+          description: Valores leídos exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SheetValuesResponse'
+components:
+  schemas:
+    SheetValuesResponse:
+      type: object
+      properties:
+        range:
+          type: string
+        majorDimension:
+          type: string
+        values:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
