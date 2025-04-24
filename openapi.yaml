@@ -1,13 +1,18 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: Demo Google Sheets API
   version: "1.0.0"
+  description: API para leer datos de Google Sheets usando una API key.
+
 servers:
   - url: https://sheets.googleapis.com/v4
+
 paths:
   /spreadsheets/{spreadsheetId}/values/{range}:
     get:
+      operationId: getSheetValues
       summary: Leer rango de Google Sheets
+      description: Retorna los valores de un rango específico de una hoja de cálculo de Google Sheets.
       parameters:
         - name: spreadsheetId
           in: path
@@ -32,6 +37,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SheetValuesResponse'
+
 components:
   schemas:
     SheetValuesResponse:
