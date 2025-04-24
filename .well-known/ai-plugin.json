@@ -1,0 +1,21 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Demo Google Sheets",
+  "name_for_model": "gs_demo",
+  "description_for_human": "Lee datos de mi Google Sheet vía Sheets API",
+  "description_for_model": "Plugin que obtiene valores de un rango de Google Sheets usando tu API key",
+  "auth": {
+    "type": "user_http",
+    "authorization_type": "api_key",
+    "api_key_name": "key",
+    "api_key_location": "query"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://diegomihanovich.github.io/mi-plugin-sheets/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://diegomihanovich.github.io/mi-plugin-sheets/logo.png",
+  "contact_email": "diegomihanovich@gmail.com",
+  "legal_info_url": "https://diegomihanovich.github.io/mi-plugin-sheets/legales.html"
+}
