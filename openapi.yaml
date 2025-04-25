@@ -5,10 +5,10 @@ info:
   description: API para leer datos de Google Sheets usando una API key.
 
 servers:
-  - url: https://sheets.googleapis.com/v4
+  - url: https://sheets.googleapis.com/v4/spreadsheets?key=AIzaSyD0RTohVyLq1VwGtYfMCOBDioeVvfx6XNo
 
 paths:
-  /spreadsheets/{spreadsheetId}/values/{range}:
+  /{spreadsheetId}/values/{range}:
     get:
       operationId: getSheetValues
       summary: Leer rango de Google Sheets
@@ -17,39 +17,38 @@ paths:
         - name: spreadsheetId
           in: path
           required: true
+          description: El ID de la hoja de cálculo.
           schema:
             type: string
+          example: 1vXbfITWSSBA2gInqRVhNqWnySRCgpXXf2hpTclT1O24
         - name: range
           in: path
           required: true
+          description: Rango en notación A1 (por ejemplo: A1:O972)
           schema:
             type: string
-        - name: key
-          in: query
-          required: true
-          schema:
-            type: string
-          description: Tu API key de Google Cloud
+          example: A1:O972
       responses:
         '200':
-          description: Valores leídos exitosamente
+          description: Datos obtenidos correctamente.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SheetValuesResponse'
-
-components:
-  schemas:
-    SheetValuesResponse:
-      type: object
-      properties:
-        range:
-          type: string
-        majorDimension:
-          type: string
-        values:
-          type: array
-          items:
-            type: array
-            items:
-              type: string
+                type: object
+                properties:
+                  range:
+                    type: string
+                  majorDimension:
+                    type: string
+                  values:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string
+        '400':
+          description: Solicitud inválida.
+        '403':
+          description: Acceso denegado o clave inválida.
+        '404':
+          description: Hoja o rango no encontrado.
